@@ -1,16 +1,16 @@
-import type { GreetingRepository} from "./app/greeting/greetingRepository";
-import {FakeRepository, HttpRepository} from "./app/greeting/greetingRepository";
+import type {GreetingRepository} from "./app/greeting/greetingRepository";
+import {dbGreetingRepo, inMemoryGreetingRepo} from "./app/greeting/greetingRepository";
 
 interface Repos {
   greetingRepository: GreetingRepository
 }
 
 const repos: Repos = {
-  greetingRepository: new HttpRepository(),
+  greetingRepository: dbGreetingRepo,
 }
 
 const testRepos: Repos = {
-  greetingRepository: new FakeRepository(),
+  greetingRepository: inMemoryGreetingRepo,
 }
 
 export const getRepository = <T>(repoName: keyof Repos): T => {
